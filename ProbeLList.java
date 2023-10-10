@@ -6,8 +6,8 @@ public class ProbeLList {
     }
 
     public ProbeLList(ProbeLList aList) {
-    this.head = aList.head;
-    this.tail = aList.tail;
+
     }
+
 
 }
