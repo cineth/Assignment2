@@ -8,11 +8,26 @@ public class ProbeNode {
     }
 
     public ProbeNode(ProbeNode aNode) {
+        // Create a deep copy of the Probe object from the existing node
+        this.aProbe = new Probe(aNode.getProbe().getDestPort(), aNode.getProbe().getOriginIP(), aNode.getProbe().getOriginPort(), aNode.getProbe().getProbeTime());
 
+        // Since this is a new node in the list, set the next reference to null
+        this.next = null;
     }
 
     public Probe getProbe() {
         return aProbe;
     }
+
+    public ProbeNode getNext() {
+        return next;
+    }
+
+    // Method to set the next node in the list
+    public void setNext(ProbeNode nextNode) {
+        this.next = nextNode;
+    }
+
+
 }
 
