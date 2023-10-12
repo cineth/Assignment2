@@ -1,6 +1,6 @@
 public class ProbeNode {
-    public Probe aProbe;
-    public ProbeNode next;
+    public Probe aProbe; // data
+    public ProbeNode next; // link
 
     public ProbeNode(Probe aProbe) {
         this.aProbe = aProbe;

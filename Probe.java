@@ -17,6 +17,7 @@ public class Probe {
     public String getOriginIP() {
         return originIP;
     }
+
     public int getOriginPort() {
         return originPort;
     }
