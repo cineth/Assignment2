@@ -2,12 +2,13 @@ public class ProbeLList {
     private ProbeNode head; //here is the link component
     private ProbeNode tail; //here is the link component
     private int length;
+
     public boolean isEmpty() {
         return (head == null);
     }
 
     // Constructor
-    public ProbeLList(){
+    public ProbeLList() {
         this.head = null;
         this.length = 0;
     }
@@ -17,16 +18,15 @@ public class ProbeLList {
     public ProbeLList(ProbeLList aList) {
 
         this.length = aList.length;
-        if (aList.isEmpty()){
+        if (aList.isEmpty()) {
             this.head = null;
-        }
-        else{
+        } else {
             this.head = new ProbeNode(aList.head.aProbe);
 
             ProbeNode copyList = this.head;
             ProbeNode originalList = aList.head;
 
-            while (originalList.next != null){
+            while (originalList.next != null) {
                 copyList.next = new ProbeNode(originalList.next.aProbe);
                 originalList = originalList.next;
                 copyList = copyList.next;
@@ -72,7 +72,35 @@ public class ProbeLList {
         return this.length; // Return the position (equivalent to the length) where the 'probe' was added.
     }
 
+    public int countProbes(String ip) {
+        int count = 0;  // number of matching probes
+        ProbeNode current = head;  // Start from the head of the list
 
+        // Iterate through the linked list
+        while (current != null) {
+            if (current.aProbe.getOriginIP().equals(ip)) {
+                count++;  // If the origin IP of the current probe matches the entered IP, increase the count
+            }
+            current = current.next;  // Move to the next node
 
+        }
 
+        return count;
+    }
+
+    public int countProbes(int destPort) {
+        int count = 0;  // number of matching probes
+        ProbeNode current = head;  // Start from the head of the list
+
+        // Iterate through the linked list
+        while (current != null) {
+            if (current.aProbe.getDestPort() == destPort) {
+                count++;  // If the destination IP of the current probe matches the entered IP, increase the count
+            }
+            current = current.next;  // Move to the next node
+
+        }
+
+        return count;
+    }
 }
