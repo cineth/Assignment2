@@ -13,6 +13,7 @@ public class ProbeLList {
     }
 
     // Copy constructor
+    // from lab 3
     public ProbeLList(ProbeLList aList) {
 
         this.length = aList.length;
