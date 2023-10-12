@@ -1,6 +1,6 @@
 public class ProbeLList {
-    private ProbeNode head; //here is the link component
-    private ProbeNode tail; //here is the link component
+    private ProbeNode head;
+    private ProbeNode tail;
     private int length;
 
     public boolean isEmpty() {

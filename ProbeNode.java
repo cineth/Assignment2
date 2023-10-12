@@ -1,10 +1,10 @@
 public class ProbeNode {
-    public Probe aProbe; //here is the link component
-    public ProbeNode next; //here is the link component
+    public Probe aProbe;
+    public ProbeNode next;
 
     public ProbeNode(Probe aProbe) {
         this.aProbe = aProbe;
-        this.next = null; // Initially, there's no next node'
+        this.next = null; // Initially, there's no next node
     }
 
     public ProbeNode(ProbeNode aNode) {
