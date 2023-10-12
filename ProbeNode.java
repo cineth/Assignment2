@@ -10,16 +10,13 @@ public class ProbeNode {
     public ProbeNode(ProbeNode aNode) {
         // Create a deep copy of the Probe object from the existing node
         // note: this.aProbe = aNode.aProbe; makes a shallow copy meaning all nodes will reference the same Probe object
-        this.aProbe = new Probe(aNode.getProbe().getDestPort(), aNode.getProbe().getOriginIP(), aNode.getProbe().getOriginPort(), aNode.getProbe().getProbeTime());
+        this.aProbe = new Probe(aNode.aProbe.getDestPort(), aNode.aProbe.getOriginIP(), aNode.aProbe.getOriginPort(), aNode.aProbe.getProbeTime());
 
 
         // Since this is a new node in the list, set the next reference to null
         this.next = null;
     }
 
-    public Probe getProbe() {
-        return aProbe;
-    }
 
     public ProbeNode getNext() {
         return next;

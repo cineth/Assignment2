@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class ProbeLList {
     private ProbeNode head;
     private ProbeNode tail;
@@ -103,6 +105,54 @@ public class ProbeLList {
 
         return count;
     }
+
+    public ArrayList<String> getProbers(int destPort) {
+        // Create an ArrayList to store source IP addresses
+        ArrayList<String> probers = new ArrayList<>();
+
+        // Start at the beginning of the linked list
+        ProbeNode current = head;
+
+        // Iterate through the linked list until the end is reached
+        while (current != null) {
+            // Check if the destination port of the current Probe matches the provided destPort
+            if (current.aProbe.getDestPort() == destPort) {
+                // If it matches, add the source IP of the current Probe to the probers list
+                probers.add(current.aProbe.getOriginIP());
+            }
+
+            // Move to the next node in the linked list
+            current = current.next;
+        }
+
+        // Return the list of source IP addresses that probed the specified destination port
+        return probers;
+    }
+
+
+    public ArrayList<String> getProbers(String ip) {
+        // Create an ArrayList to store source IP addresses
+        ArrayList<String> probers = new ArrayList<>();
+
+        // Start at the beginning of the linked list
+        ProbeNode current = head;
+
+        // Iterate through the linked list until the end is reached
+        while (current != null) {
+            // Check if the origin port of the current Probe matches the provided destPort
+            if (current.aProbe.getOriginIP().equals(ip)) {
+                // If it matches, add the source IP of the current Probe to the probers list
+                probers.add(current.aProbe.getOriginIP());
+            }
+
+            // Move to the next node in the linked list
+            current = current.next;
+        }
+
+        // Return the list of source IP addresses that probed the specified origin port
+        return probers;
+    }
+
 
 
 
