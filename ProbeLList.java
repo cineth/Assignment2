@@ -51,12 +51,6 @@ public class ProbeLList {
         return 1 + getActualSz(node.getNext());
     }
 
-    /**
-     * Inserts a probe into the linked list at the end.
-     *
-     * @param probe The probe to be inserted.
-     * @return The position (1-based) of the element just added.
-     */
     public int insertProbe(Probe probe) {
 
         ProbeNode newLink = new ProbeNode(probe); // Create a new ProbeNode called 'newLink' containing the provided 'probe'.
