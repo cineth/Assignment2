@@ -22,8 +22,10 @@ public class ProbeLList {
         this.length = aList.length;
         if (aList.isEmpty()) {
             this.head = null;
+            this.tail = null;
         } else {
-            this.head = new ProbeNode(aList.head.aProbe);
+
+            this.head = new ProbeNode(aList.head.aProbe);  // new head node with a deep copy of the first Probe in the source list
 
             ProbeNode copyList = this.head;
             ProbeNode originalList = aList.head;
@@ -141,7 +143,7 @@ public class ProbeLList {
         while (current != null) {
             // Check if the origin port of the current Probe matches the provided destPort
             if (current.aProbe.getOriginIP().equals(ip)) {
-                // If it matches, add the source IP of the current Probe to the probers list
+                // If it matches, add the origin IP of the current Probe to the probers list
                 probers.add(current.aProbe.getOriginIP());
             }
 
