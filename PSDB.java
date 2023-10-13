@@ -9,6 +9,9 @@ import java.util.Scanner;
  */
 public class PSDB {
     public static void main(String[] args) throws FileNotFoundException {
+
+        ProbeLList probes = new ProbeLList();
+
         /*The File and Scanner goes here*/
         File in = new File("firewall.log.txt");
         Scanner s = new Scanner(in);
