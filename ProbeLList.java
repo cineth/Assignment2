@@ -36,7 +36,7 @@ public class ProbeLList {
                 copyList = copyList.next;
 
                 this.tail = originalList; // Update the tail as you copy nodes
-                length++; // Increment the length for each copied node
+                length++;
 
             }
 
@@ -51,7 +51,7 @@ public class ProbeLList {
             return 0;
         }
 
-        // Recursive case: Add 1 and recursively calculate the length of the rest of the list
+        // Add 1 and recursively calculate the length of the rest of the list
         return 1 + getActualSz(node.getNext());
     }
 
