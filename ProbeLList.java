@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ProbeLList {
     private ProbeNode head;
@@ -110,7 +111,7 @@ public class ProbeLList {
 
     public ArrayList<String> getProbers(int destPort) {
         // Create an ArrayList to store source IP addresses
-        ArrayList<String> probers = new ArrayList<>();
+        ArrayList<String> portArrayList = new ArrayList<>();
 
         // Start at the beginning of the linked list
         ProbeNode current = head;
@@ -120,7 +121,7 @@ public class ProbeLList {
             // Check if the destination port of the current Probe matches the provided destPort
             if (current.aProbe.getDestPort() == destPort) {
                 // If it matches, add the source IP of the current Probe to the probers list
-                probers.add(current.aProbe.getOriginIP());
+                portArrayList.add(current.aProbe.getOriginIP());
             }
 
             // Move to the next node in the linked list
@@ -128,32 +129,33 @@ public class ProbeLList {
         }
 
         // Return the list of source IP addresses that probed the specified destination port
-        return probers;
+        return portArrayList;
     }
 
 
-    public ArrayList<String> getProbers(String ip) {
-        // Create an ArrayList to store source IP addresses
-        ArrayList<String> probers = new ArrayList<>();
+    public ArrayList<Probe> getProbers(String ip) {
+        // Create an ArrayList to store matching Probe objects
+        ArrayList<Probe> probeList = new ArrayList<>();
 
         // Start at the beginning of the linked list
         ProbeNode current = head;
 
         // Iterate through the linked list until the end is reached
         while (current != null) {
-            // Check if the origin port of the current Probe matches the provided destPort
-            if (current.aProbe.getOriginIP().equals(ip)) {
-                // If it matches, add the origin IP of the current Probe to the probers list
-                probers.add(current.aProbe.getOriginIP());
+            // Check if the origin IP of the current Probe matches the provided IP
+            if (Objects.equals(current.aProbe.getOriginIP(), ip)) {
+                // If it matches, add the current Probe to the list
+                probeList.add(current.aProbe);
             }
 
             // Move to the next node in the linked list
             current = current.next;
         }
 
-        // Return the list of source IP addresses that probed the specified origin port
-        return probers;
+        // Return the list of Probe objects with matching source IP addresses
+        return probeList;
     }
+
 
 
 

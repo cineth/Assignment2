@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -16,6 +17,11 @@ public class PSDB {
         File in = new File("firewall.log.txt");
         Scanner s = new Scanner(in);
 
+        // Read lines from the file and insert them as Probe objects
+        while (s.hasNextLine()) {
+            String line = s.nextLine();
+
+        }
     }
 
 }
