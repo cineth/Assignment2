@@ -1,23 +1,38 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * CINETH MARAKAWATTE - OCT 21
+ * Represents a linked list structure for storing Probe objects.
+ */
 public class ProbeLList {
     private ProbeNode head;
     private ProbeNode tail;
     private int length;
 
+    /**
+     * Checks if the linked list is empty.
+     *
+     * return true if the list is empty, false otherwise.
+     */
     public boolean isEmpty() {
         return (head == null);
     }
 
-    // Constructor
+
+    /**
+     * Default constructor for initializing an empty linked list.
+     */
     public ProbeLList() {
         this.head = null;
         this.length = 0;
     }
 
-    // Copy constructor
-    // from lab 3
+    /**
+     * Copy constructor for creating a deep copy of another ProbeLList object.
+     *
+     *  aList The source linked list to copy from.
+     */
     public ProbeLList(ProbeLList aList) {
 
         this.length = aList.length;
@@ -26,7 +41,7 @@ public class ProbeLList {
             this.tail = null;
         } else {
 
-            this.head = new ProbeNode(aList.head.aProbe);  // new head node with a deep copy of the first Probe in the source list
+            this.head = new ProbeNode(aList.head.aProbe);
 
             ProbeNode copyList = this.head;
             ProbeNode originalList = aList.head;
@@ -36,7 +51,7 @@ public class ProbeLList {
                 originalList = originalList.next;
                 copyList = copyList.next;
 
-                this.tail = originalList; // Update the tail as you copy nodes
+                this.tail = originalList;
                 length++;
 
             }
@@ -44,116 +59,154 @@ public class ProbeLList {
         }
 
     }
+    /**
+     * Recursive method to calculate the length of the linked list.
+     *
+     *  node The starting node for counting.
+     * return The length of the list from the provided node to the end.
+     */
 
-    // Recursive method to calculate the length of the linked list
     private int getActualSz(ProbeNode node) {
-        // If the current node is null, return 0
         if (node == null) {
             return 0;
         }
 
-        // Add 1 and recursively calculate the length of the rest of the list
         return 1 + getActualSz(node.getNext());
     }
-
+    /**
+     * Inserts a new Probe object into the linked list.
+     *
+     *  probe The Probe object to be inserted.
+     * return The position where the probe was added.
+     */
     public int insertProbe(Probe probe) {
 
-        ProbeNode newLink = new ProbeNode(probe); // Create a new ProbeNode called 'newLink' containing the provided 'probe'.
+        ProbeNode newLink = new ProbeNode(probe);
 
         if (this.isEmpty()) {
-            this.head = newLink; // If the linked list is empty, set the 'head' to the new 'newLink'.
+            this.head = newLink;
         } else {
-            ProbeNode current = this.head; // If the linked list is not empty, start traversing the list from the 'head'.
+            ProbeNode current = this.head;
 
             while (current.next != null) {
-                current = current.next; // Loop until you find the last node (the node with no 'next' reference).
+                current = current.next;
             }
 
-            current.next = newLink; // Set the 'next' of the current last node to 'newLink', effectively adding it to the end.
+            current.next = newLink;
         }
 
-        this.length += 1; // Increment the length attribute to keep track of the number of nodes in the list.
+        this.length += 1;
 
-        return this.length; // Return the position (equivalent to the length) where the 'probe' was added.
+        return this.length;
     }
-
+    /**
+     * Counts the number of probes that originate from a specific IP address.
+     *
+     *  ip The source IP address.
+     * return The number of probes from the specified IP.
+     */
     public int countProbes(String ip) {
-        int count = 0;  // number of matching probes
-        ProbeNode current = head;  // Start from the head of the list
-
-        // Iterate through the linked list
-        while (current != null) {
-            if (current.aProbe.getOriginIP().equals(ip)) {
-                count++;  // If the origin IP of the current probe matches the entered IP, increase the count
-            }
-            current = current.next;  // Move to the next node
-
-        }
-
-        return count;
-    }
-
-    public int countProbes(int destPort) {
-        int count = 0;  // number of matching probes
-        ProbeNode current = head;  // Start from the head of the list
-
-        // Iterate through the linked list
-        while (current != null) {
-            if (current.aProbe.getDestPort() == destPort) {
-                count++;  // If the destination IP of the current probe matches the entered IP, increase the count
-            }
-            current = current.next;  // Move to the next node
-
-        }
-
-        return count;
-    }
-
-    public ArrayList<String> getProbers(int destPort) {
-        // Create an ArrayList to store source IP addresses
-        ArrayList<String> portArrayList = new ArrayList<>();
-
-        // Start at the beginning of the linked list
+        int count = 0;
         ProbeNode current = head;
 
-        // Iterate through the linked list until the end is reached
+
         while (current != null) {
-            // Check if the destination port of the current Probe matches the provided destPort
+            if (current.aProbe.getOriginIP().equals(ip)) {
+                count++;
+            }
+            current = current.next;
+
+        }
+
+        return count;
+    }
+    /**
+     * Counts the number of probes targeting a specific destination port.
+     *
+     *  destPort The destination port.
+     * return The number of probes to the specified port.
+     */
+    public int countProbes(int destPort) {
+        int count = 0;
+        ProbeNode current = head;
+
+
+        while (current != null) {
             if (current.aProbe.getDestPort() == destPort) {
-                // If it matches, add the source IP of the current Probe to the probers list
+                count++;
+            }
+            current = current.next;
+
+        }
+
+        return count;
+    }
+    /**
+     * Retrieves a list of source IP addresses that probed a specific destination port.
+     *
+     *  destPort The destination port to check.
+     * return A list of source IP addresses that probed the specified port.
+     */
+    public ArrayList<String> getProbers(int destPort) {
+
+        ArrayList<String> portArrayList = new ArrayList<>();
+
+        ProbeNode current = head;
+
+        while (current != null) {
+
+            if (current.aProbe.getDestPort() == destPort && !portArrayList.contains(current.aProbe.getOriginIP())) {
+
                 portArrayList.add(current.aProbe.getOriginIP());
             }
 
-            // Move to the next node in the linked list
             current = current.next;
         }
 
-        // Return the list of source IP addresses that probed the specified destination port
+
         return portArrayList;
     }
 
-
+    /**
+     * Retrieves a list of Probe objects that originate from a specific IP address.
+     *
+     *  ip The source IP address.
+     * return A list of Probe objects from the specified IP.
+     */
     public ArrayList<Probe> getProbers(String ip) {
-        // Create an ArrayList to store matching Probe objects
         ArrayList<Probe> probeList = new ArrayList<>();
 
-        // Start at the beginning of the linked list
         ProbeNode current = head;
 
-        // Iterate through the linked list until the end is reached
         while (current != null) {
-            // Check if the origin IP of the current Probe matches the provided IP
+
             if (Objects.equals(current.aProbe.getOriginIP(), ip)) {
-                // If it matches, add the current Probe to the list
+
                 probeList.add(current.aProbe);
             }
 
-            // Move to the next node in the linked list
             current = current.next;
         }
 
-        // Return the list of Probe objects with matching source IP addresses
         return probeList;
+    }
+    /**
+     * Retrieves a list of ports scanned by packets originating from a specific IP address.
+     *
+     *  ip The source IP address.
+     * return A list of destination ports scanned by the specified IP.
+     */
+    public ArrayList<Integer> getPortsScannedByIP(String ip) {
+        ArrayList<Probe> probesByIP = getProbers(ip);
+        ArrayList<Integer> ports = new ArrayList<>();
+
+        for (Probe probe : probesByIP) {
+            if (!ports.contains(probe.getDestPort())) {
+                ports.add(probe.getDestPort());
+            }
+        }
+
+        return ports;
     }
 
 
