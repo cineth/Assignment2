@@ -14,9 +14,22 @@ public class PSDB {
      *  scanner The scanner object to read user input.
      */
     public static void handleIPQuery(ProbeLList list, Scanner scanner) {
-        // Assuming you want similar functionality here as in other handlers
-        System.out.println("Handle IP Query functionality goes here.");
+        System.out.println("For which IP do you wish to retrieve statistics?");
+        String ip = scanner.nextLine().trim();
+
+        while (!ip.equalsIgnoreCase("END")) {
+            int count = list.countProbes(ip);
+            if (count > 0) {
+                System.out.println("There were " + count + " probes from " + ip + ".");
+            } else {
+                System.out.println("There were no probes from that IP address.");
+            }
+
+            System.out.println("For which IP do you wish to retrieve statistics?");
+            ip = scanner.nextLine().trim();
+        }
     }
+
     /**
      * Handles queries related to a list of ports that an IP address has scanned.
      *
@@ -93,8 +106,6 @@ public class PSDB {
     public static void main(String[] args) {
         ProbeLList list = new ProbeLList();
 
-
-        // Reading from file
         try {
             File file = new File("firewall.log.txt");
             Scanner scanner = new Scanner(file);
@@ -111,7 +122,6 @@ public class PSDB {
             System.out.println("File not found.");
         }
 
-        // User interaction
         System.out.println("Welcome to the Port Scan Database.");
         Scanner inputScanner = new Scanner(System.in);
         String choice = "";

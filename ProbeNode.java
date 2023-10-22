@@ -49,13 +49,16 @@ public class ProbeNode {
 
     /**
      * Test the functionality of the {@code ProbeNode} and {@code ProbeLList} classes.
-     *
      *  args Command-line arguments (not used).
      */
     public static void main(String[] args) {
         ProbeLList list = new ProbeLList();
         list.insertProbe(new Probe(5060, "162.214.2.121", 5077, "2015-12-05(16:24:33)"));
-        System.out.println(list.countProbes("162.214.2.121")); // 1
-        System.out.println(list.countProbes(5060)); // 1
+        System.out.println(list.countProbes("162.214.2.121"));
+        System.out.println(list.countProbes(5060));
     }
+    /**
+     * 1
+     *  1
+     */
 }

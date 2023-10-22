@@ -63,6 +63,9 @@ public class Probe {
         ProbeNode node1 = new ProbeNode(probe1);
         ProbeNode node2 = new ProbeNode(node1);
         System.out.println(node2.aProbe.getOriginIP());
-        System.out.println(node2.getNext()); // Should be null
+        System.out.println(node2.getNext());
+        /**
+         * should be 162.214.2.121 and null
+         */
     }
 }
